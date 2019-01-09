@@ -1,0 +1,27 @@
+BLM1 Core
+--------------
+Number of defects with critical severity is: 0
+Number of defects with error severity is: 40
+Number of defects with error warning is: 0
+Defects codes for this app:
+Defect Code: 36 occurred 32
+Defect Code: 4 occurred 8
+=================
+CLM1 Core
+--------------
+Number of defects with critical severity is: 0
+Number of defects with error severity is: 1
+Number of defects with error warning is: 1
+Defects codes for this app:
+Defect Code: 36 occurred 1
+Defect Code: 40 occurred 1
+=================
+CLM Custom
+--------------
+Number of defects with critical severity is: 0
+Number of defects with error severity is: 1
+Number of defects with error warning is: 1
+Defects codes for this app:
+Defect Code: 36 occurred 1
+Defect Code: 40 occurred 1
+=================
