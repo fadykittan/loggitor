@@ -109,23 +109,30 @@ public class ReadLog {
 		// return DefectByApp object ready to insert in the map
 		Defect defect = getDefectObj(err);
 
+		//create app object
+		App app = getAppObj(err);
+		
+		//add the app obj to defect obj ****<===
+		//defect.addApp(app);
+		
+		
 		if (!defects.contains(defect)) {
 			defects.add(defect);
 		}
 
-		//create app object
-		App app = getAppObj(err);
 
+		
+		
 		if (apps.contains(app)) {
 
 			// find
 			App temp = findAppInSet(app);
 			// remove
-			apps.remove(temp);
+			//apps.remove(temp);
 			// add defect to app
 			temp.addDefect(defect);
 			// add
-			apps.add(temp);
+			//apps.add(temp);
 		} else {
 			app.addDefect(defect);
 			apps.add(app);

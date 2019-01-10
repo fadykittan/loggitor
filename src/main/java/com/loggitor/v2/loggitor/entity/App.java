@@ -26,12 +26,22 @@ public class App {
 	
 	private String type;
 
-
+/*
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable(name = "defect_instance",
+	joinColumns = { @JoinColumn(name = "app_id", referencedColumnName = "app_id") },
+	inverseJoinColumns = { @JoinColumn(name = "def_id",referencedColumnName = "def_id") }) 
+	private Set<Defect> defects = new HashSet<Defect>();
+	*/
+	
+	
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "defect_instance",
 	joinColumns = { @JoinColumn(name = "app_id") },
 	inverseJoinColumns = { @JoinColumn(name = "def_id") }) 
 	private Set<Defect> defects = new HashSet<Defect>();
+
+	
 	
 	public App() {
 		//empty constructor 
@@ -134,5 +144,26 @@ public class App {
 		defects.add(d);
 	}
 
+	
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj == null)
+			return false;
+		
+		if (!App.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+		
+		App other = (App) obj;
+		
+		if(this.name.equals(other.getName()))
+			return true;
+		else
+			return false;
+	}
+	
+	
 	
 }

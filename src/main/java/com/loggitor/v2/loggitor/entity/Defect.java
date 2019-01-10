@@ -1,9 +1,14 @@
 package com.loggitor.v2.loggitor.entity;
 
+import java.util.Set;
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 
 @Entity
 public class Defect {
@@ -20,8 +25,10 @@ public class Defect {
 	private String severity;
 	private int code;
 
-	
-	
+/*
+	@ManyToMany(mappedBy = "defects") 
+    private Set<App> apps;
+	*/
 	
 	
 	public Defect() {
@@ -92,5 +99,35 @@ public class Defect {
 	public void setCode(int code) {
 		this.code = code;
 	}
+	
+	
+	/*public void addApp(App app)
+	{
+		apps.add(app);
+	}*/
 
+	
+	
+	
+	
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if(obj == null)
+			return false;
+		
+		if (!Defect.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+		
+		Defect other = (Defect) obj;
+		
+		if(this.code == other.getCode())
+			return true;
+		else
+			return false;
+	}
+	
+	
 }
