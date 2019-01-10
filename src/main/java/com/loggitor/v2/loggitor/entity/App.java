@@ -26,19 +26,14 @@ public class App {
 	
 	private String type;
 
-/*
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "defect_instance",
-	joinColumns = { @JoinColumn(name = "app_id", referencedColumnName = "app_id") },
-	inverseJoinColumns = { @JoinColumn(name = "def_id",referencedColumnName = "def_id") }) 
-	private Set<Defect> defects = new HashSet<Defect>();
-	*/
 	
 	
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "defect_instance",
-	joinColumns = { @JoinColumn(name = "app_id") },
-	inverseJoinColumns = { @JoinColumn(name = "def_id") }) 
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "app_defect",
+    joinColumns = @JoinColumn(name = "app_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "defect_id",
+    referencedColumnName = "id"))
 	private Set<Defect> defects = new HashSet<Defect>();
 
 	
@@ -139,9 +134,9 @@ public class App {
 
 
 	
-	public void addDefect(Defect d)
+	public void addDefect(int d)
 	{
-		defects.add(d);
+		defects.add(new Defect(d));
 	}
 
 	

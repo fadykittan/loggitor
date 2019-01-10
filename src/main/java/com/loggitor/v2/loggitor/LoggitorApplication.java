@@ -1,7 +1,6 @@
 package com.loggitor.v2.loggitor;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.loggitor.v2.loggitor.entity.AddToDB;
 import com.loggitor.v2.loggitor.entity.App;
 import com.loggitor.v2.loggitor.entity.AppRepo;
 import com.loggitor.v2.loggitor.entity.Defect;
@@ -59,60 +57,20 @@ public class LoggitorApplication {
 			Set<Defect> defects = log.getDefects();
 			Set<App> apps = log.getApps();
 			
+			if(defects.isEmpty())
+				System.out.println("Defects set is empty!");
+			
+			if(apps.isEmpty())
+				System.out.println("Apps set is empty!");
+			
+				
 			defectRepo.saveAll(defects);
 			appRepo.saveAll(apps);
 			
 			
-			/*
-			 * add defects
-			 *
-			Iterator <Defect> iteD = defects.iterator(); 
-			
-			
-			while(iteD.hasNext())
-			{
-				defectRepo.save(iteD.next());
-			}
-			
-			
-			/*
-			 * add apps
-			 *
-			Iterator <App> iteA = apps.iterator();
-			
-			while(iteA.hasNext())
-			{
-				appRepo.save(iteA.next());
-			}
-			*/
 
 		};
 	}
 
-	private static void run() {
-
-		// ReadLog log = new ReadLog(args[0]);
-		ReadLog log = new ReadLog(
-				"C:\\Users\\Fady\\eclipse-workspace\\loggitor\\src\\main\\java\\com\\loggitor\\v2\\loggitor\\TestLog.log");
-
-		try {
-			log.processFile();
-		} catch (IOException e) {
-			System.out.println(e.getMessage() + " -> error occurred while processing the file");
-		}
-
-		Set<Defect> defects = log.getDefects();
-		Set<App> apps = log.getApps();
-
-		// making a AddToDB object and use it
-
-		AddToDB db = new AddToDB(defects, apps);
-
-		// adding Defect objects to db
-		db.addDefects();
-
-		// adding App objects to db
-		db.addApps();
-	}
 
 }

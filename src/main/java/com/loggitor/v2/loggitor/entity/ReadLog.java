@@ -112,40 +112,37 @@ public class ReadLog {
 		//create app object
 		App app = getAppObj(err);
 		
-		//add the app obj to defect obj ****<===
-		//defect.addApp(app);
 		
-		
-		if (!defects.contains(defect)) {
+		Defect tempDef = findDefInSet(defect);
+		if (tempDef !=null) {
+			
+			boolean b = defects.remove(tempDef);
+			
+			tempDef.addApp(app.getName(), app.getType());
+			
+			defects.add(tempDef);
+			
+		}
+		else
+		{
+			defect.addApp(app.getName(), app.getType());
 			defects.add(defect);
 		}
 
 
-		
-		
-		if (apps.contains(app)) {
-
-			// find
-			App temp = findAppInSet(app);
-			// remove
-			//apps.remove(temp);
-			// add defect to app
-			temp.addDefect(defect);
-			// add
-			//apps.add(temp);
-		} else {
-			app.addDefect(defect);
+		App tempApp = findAppInSet(app);
+		if(apps.contains(app))
+		{
+			boolean b = apps.remove(tempApp);
+			tempApp.addDefect(defect.getCode());
+			apps.add(tempApp);
+		}
+		else
+		{
+			app.addDefect(defect.getCode());
 			apps.add(app);
 		}
 
-		////// ********************************////////
-		////// ********************************////////
-		/*
-		 * pick up from here just created a defect obj check if the defect obj exist and
-		 * add the defect obj to the set create app obj check if the app obj exist and
-		 * add it to the app set
-		 */
-		////// ********************************////////
 
 	}
 
@@ -195,7 +192,7 @@ public class ReadLog {
 
 		while (ite.hasNext()) {
 			temp = ite.next();
-			if (temp.equals(app)) {
+			if (temp.getName() == app.getName()) {
 				return temp;
 			}
 		}
@@ -203,5 +200,25 @@ public class ReadLog {
 		return null;
 
 	}
+	
+	
+	
+	private Defect findDefInSet(Defect def) {
+		Iterator<Defect> ite = defects.iterator();
+		Defect temp;
+
+		while (ite.hasNext()) {
+			temp = ite.next();
+			if (temp.getCode() == def.getCode()) {
+				return temp;
+			}
+		}
+
+		return null;
+
+	}
+	
+	
+	
 
 }

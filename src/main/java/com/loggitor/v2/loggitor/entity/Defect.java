@@ -1,5 +1,6 @@
 package com.loggitor.v2.loggitor.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -25,10 +26,10 @@ public class Defect {
 	private String severity;
 	private int code;
 
-/*
+
 	@ManyToMany(mappedBy = "defects") 
-    private Set<App> apps;
-	*/
+    private Set<App> apps = new HashSet<App>();
+	
 	
 	
 	public Defect() {
@@ -101,10 +102,10 @@ public class Defect {
 	}
 	
 	
-	/*public void addApp(App app)
+	public void addApp(String app, String type)
 	{
-		apps.add(app);
-	}*/
+		apps.add(new App(app, type));
+	}
 
 	
 	
